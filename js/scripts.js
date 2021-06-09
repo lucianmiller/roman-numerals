@@ -4,6 +4,16 @@ function convertNumber(num) {
   const romanList = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
   let outputArray = [];
   if (num > 3999 || num <= 0) return "Please enter a number greater then 0 and less then 3,999";
+  for (let index = 0; index < numList.length; index ++) {
+    if (num - numList[index] >= 0) {
+      num -= numList[index];
+      outputArray.push(romanList[index]);
+    };
+    if (num >= numList[index]) {
+      index --;
+    };
+  };
+  return outputArray.join("");
 };
 
 //User Logic---------------
@@ -12,8 +22,6 @@ $(document).ready(function() {
     event.preventDefault();
     const userNumber = parseInt($("#number").val());
     const convertedNumber = (convertNumber(userNumber));
-    console.log(convertedNumber);
-    console.log(userNumber);
     $("#roman").text(convertedNumber);
   });
 });
